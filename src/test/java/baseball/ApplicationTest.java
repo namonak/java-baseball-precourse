@@ -3,6 +3,8 @@ package baseball;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,6 +127,27 @@ class ApplicationTest extends NsTest {
 
             assertEquals(actualBallCnt, tests[i].wantBallCnt);
             assertEquals(actualStrikeCnt, tests[i].wantStrikeCnt);
+        }
+    }
+
+    @Test
+    void validateTest() {
+        Application.BaseballGameView baseballGameView = new Application.BaseballGameView();
+
+        for (String s : Arrays.asList("aaa", "최해나", "Hannah", "1a1", "13?", "1", "12", "1234", "023", "103", "120")) {
+            assertThatIllegalArgumentException().isThrownBy(() -> baseballGameView.validate(s));
+        }
+    }
+
+    @Test
+    void checkResumeGameTest() {
+        Application.BaseballGameView baseballGameView = new Application.BaseballGameView();
+
+        for (String s : Arrays.asList("1", "2")) {
+            assertThat(baseballGameView.checkResumeGame(s)).isTrue();
+        }
+        for (String s : Arrays.asList("3", "12", "21", "aaa", "최해나", "Hannah")) {
+            assertThat(baseballGameView.checkResumeGame(s)).isFalse();
         }
     }
 }
