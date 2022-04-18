@@ -124,7 +124,21 @@ public class Application {
         }
     }
 
-    static class BaseballGameController {}
+    static class BaseballGameController {
+        private final BaseballGameModel baseballGameModel = new BaseballGameModel();
+        private final BaseballGameView view = new BaseballGameView();
+
+        private void start() {
+            do {
+                int[] answer = baseballGameModel.generateAnswer();
+                do {
+                    int[] guess = view.inputGuess();
+                    int[] score = baseballGameModel.score(guess, answer);
+                    view.printScore(score);
+                } while (!view.isEndGame);
+            } while (view.isResumeGame());
+        }
+    }
 
     static class Utils {
         private static final int MIN_NUM = 1;
@@ -162,6 +176,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        BaseballGameController baseballGameController = new Application.BaseballGameController();
+        baseballGameController.start();
     }
 }
