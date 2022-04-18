@@ -50,7 +50,7 @@ class ApplicationTest extends NsTest {
         }
     }
 
-    static class TestCase {
+    static class scoreTestCase {
         public String description;
         public int[] guess;
         public int[] answer;
@@ -60,8 +60,8 @@ class ApplicationTest extends NsTest {
 
     @Test
     void scoreTest() {
-        TestCase[] tests = new TestCase[] {
-            new TestCase() {
+        scoreTestCase[] tests = new scoreTestCase[] {
+            new scoreTestCase() {
                 {
                     description = "3볼";
                     guess = new int[]{9, 1, 2};
@@ -70,7 +70,7 @@ class ApplicationTest extends NsTest {
                     wantStrikeCnt = 0;
                 }
             },
-            new TestCase() {
+            new scoreTestCase() {
                 {
                     description = "3스트라이크";
                     guess = new int[]{1, 2, 3};
@@ -79,7 +79,7 @@ class ApplicationTest extends NsTest {
                     wantStrikeCnt = 3;
                 }
             },
-            new TestCase() {
+            new scoreTestCase() {
                 {
                     description = "2볼 1스트라이크";
                     guess = new int[]{3, 8, 2};
@@ -88,7 +88,7 @@ class ApplicationTest extends NsTest {
                     wantStrikeCnt = 1;
                 }
             },
-            new TestCase() {
+            new scoreTestCase() {
                 {
                     description = "2스트라이크";
                     guess = new int[]{3, 8, 2};
@@ -97,7 +97,7 @@ class ApplicationTest extends NsTest {
                     wantStrikeCnt = 2;
                 }
             },
-            new TestCase() {
+            new scoreTestCase() {
                 {
                     description = "1스트라이크";
                     guess = new int[]{3, 8, 2};
@@ -106,7 +106,7 @@ class ApplicationTest extends NsTest {
                     wantStrikeCnt = 1;
                 }
             },
-            new TestCase() {
+            new scoreTestCase() {
                 {
                     description = "낫싱";
                     guess = new int[]{2, 3, 4};
@@ -149,6 +149,54 @@ class ApplicationTest extends NsTest {
         }
         for (String s : Arrays.asList("3", "12", "21", "aaa", "최해나", "Hannah")) {
             assertThat(baseballGameView.checkResumeGame(s)).isFalse();
+        }
+    }
+
+    static class makeResultTestCase {
+        public String description;
+        public int[] guess;
+        public String answer;
+    }
+
+    @Test
+    void makeResult() {
+        makeResultTestCase[] tests = new makeResultTestCase[] {
+            new makeResultTestCase() {
+                {
+                    description = "낫싱";
+                    guess = new int[]{0, 0};
+                    answer = "낫싱";
+                }
+            },
+            new makeResultTestCase() {
+                {
+                    description = "3스트라이크";
+                    guess = new int[]{0, 3};
+                    answer = "3스트라이크";
+                }
+            },
+            new makeResultTestCase() {
+                {
+                    description = "3볼";
+                    guess = new int[]{3, 0};
+                    answer = "3볼 ";
+                }
+            },
+            new makeResultTestCase() {
+                {
+                    description = "1볼 2스트라이크";
+                    guess = new int[]{1, 2};
+                    answer = "1볼 2스트라이크";
+                }
+            },
+        };
+
+        for (int i = 0; i < tests.length; i++) {
+            Application.BaseballGameView baseballGameView = new Application.BaseballGameView();
+
+            String result = baseballGameView.makeResult(tests[i].guess);
+
+            assertEquals(tests[i].answer, result);
         }
     }
 }

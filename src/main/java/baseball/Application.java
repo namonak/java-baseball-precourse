@@ -98,7 +98,7 @@ public class Application {
             return RESUME_GAME.equals(input);
         }
 
-        private String makeResult(int[] result) {
+        String makeResult(int[] result) {
             StringBuilder sb = new StringBuilder();
             if (result[INDEX_BALL] == 0 && result[INDEX_STRIKE] == 0) {
                 return sb.append("낫싱").toString();
