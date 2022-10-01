@@ -14,7 +14,7 @@ public class BallNumber {
 
     private static void checkBallNumber(int ballNumber) {
         if (ballNumber < MIN_NUMBER || ballNumber > MAX_NUMBER) {
-            throw new IllegalArgumentException("1-9 사이의 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(MIN_NUMBER + "-" + MAX_NUMBER + " 사이의 숫자를 입력해주세요.");
         }
     }
 
