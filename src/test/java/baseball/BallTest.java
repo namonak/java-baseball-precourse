@@ -10,24 +10,24 @@ public class BallTest {
 
     @BeforeEach
     void setUp() {
-        computer = new Ball(1, new BallNumber(4));
+        computer = new Ball(1, 4);
     }
 
     @Test
     void strike() {
-        BallStatus status = computer.play(new Ball(1, new BallNumber(4)));
+        BallStatus status = computer.play(new Ball(1, 4));
         assertThat(status).isEqualTo(BallStatus.STRIKE);
     }
 
     @Test
     void ball() {
-        BallStatus status = computer.play(new Ball(2, new BallNumber(4)));
+        BallStatus status = computer.play(new Ball(2, 4));
         assertThat(status).isEqualTo(BallStatus.BALL);
     }
 
     @Test
     void nothing() {
-        BallStatus status = computer.play(new Ball(2, new BallNumber(5)));
+        BallStatus status = computer.play(new Ball(2, 5));
         assertThat(status).isEqualTo(BallStatus.NOTHING);
     }
 }

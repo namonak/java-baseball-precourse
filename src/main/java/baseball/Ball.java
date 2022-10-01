@@ -3,12 +3,12 @@ package baseball;
 import java.util.Objects;
 
 public class Ball {
-    private final int ballPosition;
+    private final Position position;
     private final BallNumber ballNumber;
 
-    public Ball(int ballPosition, BallNumber ballNumber) {
-        this.ballPosition = ballPosition;
-        this.ballNumber = ballNumber;
+    public Ball(int position, int ballNumber) {
+        this.position = new Position(position);
+        this.ballNumber = new BallNumber(ballNumber);
     }
 
     public BallStatus play(Ball ball) {
@@ -32,11 +32,11 @@ public class Ball {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ball ball = (Ball) o;
-        return ballPosition == ball.ballPosition && ballNumber.equals(ball.ballNumber);
+        return Objects.equals(position, ball.position) && Objects.equals(ballNumber, ball.ballNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ballPosition, ballNumber);
+        return Objects.hash(position, ballNumber);
     }
 }
