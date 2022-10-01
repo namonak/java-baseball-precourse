@@ -1,4 +1,4 @@
-package baseball;
+package baseball.domain;
 
 public class PlayResult {
     public static final int OUT_NUMBER = 3;
