@@ -8,7 +8,14 @@ public class Balls {
     private final List<Ball> balls;
 
     public Balls(List<Integer> ballList) {
+        checkBalls(ballList);
         this.balls = setBalls(ballList);
+    }
+
+    private static void checkBalls(List<Integer> ballList) {
+        if (ballList.size() != MAX_BALL_LENGTH) {
+            throw new IllegalArgumentException("3개의 숫자를 입력해주세요.");
+        }
     }
 
     private static List<Ball> setBalls(List<Integer> ballList) {
