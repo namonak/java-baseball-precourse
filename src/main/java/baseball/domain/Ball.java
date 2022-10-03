@@ -15,11 +15,9 @@ public class Ball {
         if (this.equals(ball)) {
             return BallStatus.STRIKE;
         }
-
         if (ball.isSameBallNumber(ballNumber)) {
             return BallStatus.BALL;
         }
-
         return BallStatus.NOTHING;
     }
 
