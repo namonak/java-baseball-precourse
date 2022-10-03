@@ -25,11 +25,13 @@ public class GameView {
     }
 
     public static void printResult(PlayResult result) {
-        if (result.getStrike() == 0 && result.getBall() == 0) {
-            System.out.println("낫싱");
+        if (isNothing(result)) {
             return;
         }
+        System.out.println(generateResult(result));
+    }
 
+    private static StringBuilder generateResult(PlayResult result) {
         StringBuilder sb = new StringBuilder();
         if (result.getBall() > 0) {
             sb.append(result.getBall()).append("볼 ");
@@ -37,12 +39,23 @@ public class GameView {
         if (result.getStrike() > 0) {
             sb.append(result.getStrike()).append("스트라이크");
         }
-        System.out.println(sb);
+        return sb;
+    }
+
+    private static boolean isNothing(PlayResult result) {
+        if (result.getStrike() == 0 && result.getBall() == 0) {
+            System.out.println("낫싱");
+            return true;
+        }
+        return false;
     }
 
     public static boolean isRestart() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        String input = readLine();
+        return validateRestartInput(readLine());
+    }
+
+    private static boolean validateRestartInput(String input) {
         if (!Utils.isNumber(input)) {
             throw new IllegalArgumentException("숫자를 입력하세요.");
         }
